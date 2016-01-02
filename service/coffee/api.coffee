@@ -33,3 +33,9 @@ class FeedApi extends AbstractApi
         @doGet(before, after, "/api/v1/feed/delete", {itemid: "#{itemid}"})
 
 @FeedApi ?= FeedApi
+
+class EventsApi extends AbstractApi
+    githubEvent: (item, before, after) ->
+        @doGet(before, after, "https://api.github.com/repos/#{item}/events")
+
+@EventsApi ?= EventsApi

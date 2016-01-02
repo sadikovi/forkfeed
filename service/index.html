@@ -26,7 +26,7 @@
                         <a class="menu-item" href="{{logouturl}}">Logout</a>
                         <div class="menu-heading">Repositories</div>
                         {% for repo in repos %}
-                        <a class="menu-item" href="#" id="{{repo.key}}" dtype="{{repo.type}}" dlink="{{repo.item}}">
+                        <a class="menu-item" href="#" id="{{repo.key}}" dtype="{{repo.type}}" daction="load" dlink="{{repo.item}}">
                             <div dkey="{{repo.key}}" daction="del" class="btn btn-link btn-micro">&times;</div>
                             <span>{{repo.item}}</span>
                         </a>
@@ -41,7 +41,7 @@
                         </div>
                         <div class="menu-heading">RSS</div>
                         {% for feed in rss %}
-                        <a class="menu-item" href="#" id="{{feed.key}}" dtype="{{feed.type}}" dlink="{{feed.item}}">
+                        <a class="menu-item" href="#" id="{{feed.key}}" dtype="{{feed.type}}" daction="load" dlink="{{feed.item}}">
                             <div dkey="{{feed.key}}" daction="del" class="btn btn-link btn-micro">&times;</div>
                             <span>{{feed.item}}</span>
                         </a>
