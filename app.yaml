@@ -14,6 +14,12 @@ handlers:
 - url: /index\.html
   script: app.application
 
+- url: /api/.*
+  script: app.application
+
+- url: /logout
+  script: app.application
+
 # resources handlers
 - url: /service/img/(.*\.(gif|png|jpg|ico))$
   static_files: service/img/\1

@@ -20,20 +20,47 @@
         <div class="page container">
             <div class="columns">
                 <div class="one-fourth column">
-                    <nav class="menu">
+                    <nav class="menu" id="forkfeed-menu">
                         <div class="menu-heading">Forkfeed</div>
+                        <div class="menu-item">{{username}}</div>
                         <a class="menu-item" href="{{logouturl}}">Logout</a>
+                        <div class="menu-heading">Repositories</div>
+                        {% for repo in repos %}
+                        <a class="menu-item" href="#" id="{{repo.key}}" dtype="{{repo.type}}" dlink="{{repo.item}}">
+                            <div dkey="{{repo.key}}" daction="del" class="btn btn-link btn-micro">&times;</div>
+                            <span>{{repo.item}}</span>
+                        </a>
+                        {% endfor %}
+                        <div class="menu-item">
+                            <div data-attr="fast-editor" id="forkfeed-add-repository">
+                                <span data-attr="fast-editor-texter"></span>
+                                <a class="link-muted" data-attr="fast-editor-trigger" href="#">
+                                    + repository
+                                </a>
+                            </div>
+                        </div>
+                        <div class="menu-heading">RSS</div>
+                        {% for feed in rss %}
+                        <a class="menu-item" href="#" id="{{feed.key}}" dtype="{{feed.type}}" dlink="{{feed.item}}">
+                            <div dkey="{{feed.key}}" daction="del" class="btn btn-link btn-micro">&times;</div>
+                            <span>{{feed.item}}</span>
+                        </a>
+                        {% endfor %}
+                        <div class="menu-item">
+                            <div data-attr="fast-editor" id="forkfeed-add-rss-feed">
+                                <span data-attr="fast-editor-texter"></span>
+                                <a class="link-muted" data-attr="fast-editor-trigger" href="#">
+                                    + rss feed
+                                </a>
+                            </div>
+                        </div>
                     </nav>
                 </div>
                 <div class="three-fourths column">
-                    <div class="top attached blue bordered segment">
-                        <div>
-                            <span class="text-mute">User: </span>
-                            <span>{{username}}</span>
-                        </div>
+                    <div class="top attached segment">
+                        <h1 class="text-thin">apache/spark</h1>
                     </div>
-                    <div class="bottom attached secondary segment">
-                        <h1 class="text-thin">Header</h1>
+                    <div class="bottom attached segment">
                     </div>
                 </div>
             </div>
