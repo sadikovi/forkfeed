@@ -1,0 +1,32 @@
+application: quantum-ratio-610
+version: 0-0-1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /
+  script: app.application
+
+- url: /index
+  script: app.application
+
+- url: /index\.html
+  script: app.application
+
+# resources handlers
+- url: /service/img/(.*\.(gif|png|jpg|ico))$
+  static_files: service/img/\1
+  upload: service/img/.*\.(gif|png|jpg|ico)$
+  http_headers:
+    Access-Control-Allow-Origin: self
+
+- url: /service/(.*\.(scss|css|eot|otf|svg|ttf|woff|woff2|js|coffee))$
+  static_files: service/\1
+  upload: service/(.*\.(scss|css|eot|otf|svg|ttf|woff|woff2|js|coffee))$
+  http_headers:
+    Access-Control-Allow-Origin: self
+
+libraries:
+- name: webapp2
+  version: latest
