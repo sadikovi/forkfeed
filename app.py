@@ -41,6 +41,9 @@ class MainApp(webapp2.RequestHandler):
                 if v["type"] == REP.TYPE]
             rss = [{"key": k, "type": v["type"], "item": v["item"]} for k, v in data \
                 if v["type"] == RSS.TYPE]
+            # sort lists in increasing order
+            repos.sort(lambda x,y: cmp(x["item"], y["item"]))
+            rss.sort(lambda x,y: cmp(x["item"], y["item"]))
             # create template values
             template_values = {
                 "username": user.nickname(),
