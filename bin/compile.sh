@@ -44,5 +44,6 @@ uglifyjs \
     $JS_DIR/utilities/mapper.js \
     $JS_DIR/utilities/fasteditor.js \
     $JS_DIR/api.js \
+    $JS_DIR/model.js \
     $JS_DIR/index.js \
     -o "$MINJS_DIR/forkfeed.min.js" -c -m
