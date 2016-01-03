@@ -33,9 +33,11 @@ eventHtml = (event) ->
         cls: "breadcrumb"
         children: [
             {type: "div", cls: "section", children:
-                type: "span", cls: "text-mute", title: "#{event.tpe}"},
-            {type: "div", cls: "section", children:
-                type: "span", cls: "text-mute", title: "by @#{event.user}"},
+                type: "span", cls: "lbl lbl-purple", title: "#{event.tpe}"},
+            {type: "div", cls: "section", children: [
+                {type: "span", cls: "text-mute", title: "by "},
+                {type: "span", cls: "text-emphasized", title: "@#{event.user}"}
+            ]},
             {type: "div", cls: "section", children:
                 type: "a", title: "View on website", href: "#{event.link}", target: "_blank"},
         ]
