@@ -28,6 +28,12 @@ new @FastEditor(actionAddRss, (status, value) ->
 
 # function to build event html segment
 eventHtml = (event) ->
+    header =
+        type: "h2"
+        children: [
+            {type: "span", title: "#{event.title}"},
+            {type: "span", cls: "text-mute", title: " ##{event.id}"}
+        ]
     footer =
         type: "div"
         cls: "breadcrumb"
@@ -45,7 +51,7 @@ eventHtml = (event) ->
         type: "div"
         cls: "segment"
         children: [
-            {type: "h3", title: "#{event.title}"}
+            header
             {type: "pre", cls: "with-wrapping", title: "#{event.msg}"}
             footer
         ]

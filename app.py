@@ -2,7 +2,7 @@
 
 from google.appengine.api import users
 from google.appengine.ext.webapp import template
-import os, json, webapp2, urllib2, uuid, re
+import os, json, webapp2, urllib2, uuid, re, time
 import paths
 from src.result import Error, Success
 import src.memcachev as memcachev
@@ -42,8 +42,8 @@ class MainApp(webapp2.RequestHandler):
             rss = [{"key": k, "type": v["type"], "item": v["item"]} for k, v in data \
                 if v["type"] == RSS.TYPE]
             # sort lists in increasing order
-            repos.sort(lambda x,y: cmp(x["item"], y["item"]))
-            rss.sort(lambda x,y: cmp(x["item"], y["item"]))
+            repos.sort(lambda x,y: cmp(x["key"], y["key"]))
+            rss.sort(lambda x,y: cmp(x["key"], y["key"]))
             # create template values
             template_values = {
                 "username": user.nickname(),
@@ -79,7 +79,7 @@ class FeedApi(webapp2.RequestHandler):
                 (tpe == RSS.TYPE and not RSS.validate(item)):
                 res = Error(400, "Could not process item %s for type %s" % (item, tpe))
             else:
-                itemid = uuid.uuid4().hex
+                itemid = "%s-%s" % (long(time.time() * 1000), uuid.uuid4().hex)
                 data = {"item": item, "type": tpe}
                 memcachev.set(itemid, data, namespace=user.user_id())
                 res = Success({"message": "Item %s has been added" % itemid})

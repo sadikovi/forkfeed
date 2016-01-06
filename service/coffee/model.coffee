@@ -1,8 +1,8 @@
 # general event object
 class Event
-    constructor: (@tpe=null, @title=null, @msg=null, @link=null, @user=null) ->
+    constructor: (@tpe, @title, @msg, @link, @user, @id) ->
 
-    valid: -> @tpe and @title and @msg and @link
+    valid: -> @tpe and @title and @msg and @link and @id
 
     hasUser: -> @user != null
 
@@ -26,22 +26,25 @@ class GithubApiParser extends Parser
         event = new Event
         if obj["type"] == "IssueCommentEvent"
             event.tpe = "Issue Comment"
+            event.id = obj["payload"]["issue"]["number"]
             event.title = obj["payload"]["issue"]["title"]
             event.msg = obj["payload"]["comment"]["body"]
             event.link = obj["payload"]["comment"]["html_url"]
-            event.user = obj["payload"]["comment"]["user"]["login"]
+            event.user = obj["actor"]["login"]
         else if obj["type"] == "PullRequestEvent"
             event.tpe = "Pull Request"
+            event.id = obj["payload"]["number"]
             event.title = obj["payload"]["pull_request"]["title"]
             event.msg = obj["payload"]["action"]
             event.link = obj["payload"]["pull_request"]["html_url"]
-            event.user = obj["payload"]["pull_request"]["user"]["login"]
+            event.user = obj["actor"]["login"]
         else if obj["type"] == "PullRequestReviewCommentEvent"
             event.tpe = "Pull Request Review Comment"
+            event.id = obj["payload"]["pull_request"]["number"]
             event.title = obj["payload"]["pull_request"]["title"]
             event.msg = obj["payload"]["comment"]["body"]
             event.link = obj["payload"]["comment"]["html_url"]
-            event.user = obj["payload"]["comment"]["user"]["login"]
+            event.user = obj["actor"]["login"]
         else
             console.log "[WARN] Unknown event for object", obj
         return event
